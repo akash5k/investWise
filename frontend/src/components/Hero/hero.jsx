@@ -1,10 +1,10 @@
 import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { baner } from "../../assets";
+import { banner } from "../../assets";
 
 const Hero = () => {
   return (
-    <div className="relative h-[85vh] py-12 px-12 lg:flex lg:items-center">      
+    <div className="relative h-[90vh] bg-gray-100 py-12 pl-12 lg:flex lg:items-center">
       <div className="lg:w-1/2">
         <h1 className="text-4xl font-bold mb-4">Invest Wiser .</h1>
         <p className="text-lg text-gray-500 mb-6">
@@ -17,14 +17,14 @@ const Hero = () => {
           </span>
         </button>
       </div>
-     
-      <div className="lg:w-1/2 lg:mt-0 mt-8 relative">       
+
+      <div className="lg:w-1/2 lg:mt-0 mt-8 relative">
         <img
-          src={baner}         
+          src={banner}
           alt="Hero Image"
-          className="rounded-lg shadow-lg"
+          className=" h-[90vh] w-full object-cover"
+          style={{ margin: 0, padding: 0 }}
         />
-      
       </div>
     </div>
   );
