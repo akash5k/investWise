@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import './Navbar.css'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -8,17 +9,62 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white"> {/* Apply the bg-white class for a white background */}
+    <nav className="bg-white drop-shadow-md">
       <div className="container mx-auto px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="text-gray-900"> {/* Change text color to gray-900 */}
-            <a href="/" className="text-xl font-bold text-gray-900">Your Logo</a>
+          <div className="text-gray-900">
+            <a href="/" className="text-xl font-bold text-gray-900">
+              Your Logo
+            </a>
           </div>
 
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-4">
+            <a
+              href="/"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Home
+              <span className="underline"></span>
+            </a>
+            <a
+              href="/about"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              About
+              <span className="underline"></span>
+            </a>
+            <a
+              href="/contact"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Contact
+              <span className="underline"></span>
+            </a>
+          </div>
+
+          <div className="hidden md:flex space-x-4">
+            <a
+              href="/signin"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Log In
+              <span className="underline"></span>
+            </a>
+            <a
+              href="/signup"
+              className="text-white bg-gray-900 rounded-lg border border-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Sign Up
+              <span className="underline"></span>
+            </a>
+          </div>
+
+          {/* Mobile Menu */}
           <div className="md:hidden">
             <button
               onClick={toggleMobileMenu}
-              className="text-gray-900 focus:outline-none" 
+              className="text-gray-900 focus:outline-none"
             >
               {isMobileMenuOpen ? (
                 <svg
@@ -53,20 +99,49 @@ const Navbar = () => {
               )}
             </button>
           </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-4">
-            <a href="/" className="text-gray-900 hover:bg-gray-700 hover:text-white px-4 py-2 rounded">Home</a> 
-            <a href="/about" className="text-gray-900 hover:bg-gray-700 hover:text-white px-4 py-2 rounded">About</a> 
-            <a href="/contact" className="text-gray-900 hover:bg-gray-700 hover:text-white px-4 py-2 rounded">Contact</a> 
-          </div>
         </div>
 
         {/* Mobile Menu (Collapsible) */}
-        <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-          <a href="/" className="block text-gray-900 hover:bg-gray-700 px-4 py-2">Home</a> 
-          <a href="/about" className="block text-gray-900 hover:bg-gray-700 px-4 py-2">About</a> 
-          <a href="/contact" className="block text-gray-900 hover:bg-gray-700 px-4 py-2">Contact</a> 
+        <div className={`md:hidden ${isMobileMenuOpen ? "block" : "hidden"}`}>
+          <div className="text-gray-900">
+            <a
+              href="/"
+              className="block text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Home
+              <span className="underline"></span>
+            </a>
+            <a
+              href="/about"
+              className="block text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              About
+              <span className="underline"></span>
+            </a>
+            <a
+              href="/contact"
+              className="block text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Contact
+              <span className="underline"></span>
+            </a>
+          </div>
+          <div className="text-gray-900 mt-4">
+            <a
+              href="/signup"
+              className="block text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Sign Up
+              <span className="underline"></span>
+            </a>
+            <a
+              href="/signin"
+              className="block text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
+              Log In
+              <span className="underline"></span>
+            </a>
+          </div>
         </div>
       </div>
     </nav>

@@ -1,10 +1,10 @@
 import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { baner } from "../../assets";
 
 const Hero = () => {
   return (
-    <div className="relative h-[90vh] py-12 px-12 lg:flex lg:items-center">
-      {/* Left Side (Text) */}
+    <div className="relative h-[85vh] py-12 px-12 lg:flex lg:items-center">      
       <div className="lg:w-1/2">
         <h1 className="text-4xl font-bold mb-4">Invest Wiser .</h1>
         <p className="text-lg text-gray-500 mb-6">
@@ -17,12 +17,10 @@ const Hero = () => {
           </span>
         </button>
       </div>
-
-      {/* Right Side (Image with Design Overlay) */}
-      <div className="lg:w-1/2 lg:mt-0 mt-8 relative">
-        {/* Image */}
+     
+      <div className="lg:w-1/2 lg:mt-0 mt-8 relative">       
         <img
-          src="https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          src={baner}         
           alt="Hero Image"
           className="rounded-lg shadow-lg"
         />
