@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
 
-import './Navbar.css'
+import "./navbar.css"
 
 const Navbar = () => {
   return (
@@ -9,26 +9,41 @@ const Navbar = () => {
       <div className="container mx-auto px-8">
         <div className="flex justify-between items-center py-4">
           <div className="text-gray-900">
-            <Link to="/" className="text-xl font-bold text-gray-900 tracking-[0.3rem]">
+            <Link
+              to="/"
+              className="text-xl font-bold text-gray-900 tracking-[0.3rem]"
+            >
               Investwise
             </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="md:flex space-x-4">
-            <Link to="/" className="text-gray-900 px-4 py-2 relative overflow-hidden">
+            <Link
+              to="/"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
               Home
               <span className="underline"></span>
             </Link>
-            <Link to="/about" className="text-gray-900 px-4 py-2 relative overflow-hidden">
+            <Link
+              to="/about"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
               About
               <span className="underline"></span>
             </Link>
-            <Link to="/contact" className="text-gray-900 px-4 py-2 relative overflow-hidden">
+            <Link
+              to="/contact"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
               Contact
               <span className="underline"></span>
             </Link>
-            <Link to="/signin" className="text-gray-900 px-4 py-2 relative overflow-hidden">
+            <Link
+              to="/signin"
+              className="text-gray-900 px-4 py-2 relative overflow-hidden"
+            >
               Log In
               <span className="underline"></span>
             </Link>
@@ -40,7 +55,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
