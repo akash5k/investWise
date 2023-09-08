@@ -1,27 +1,55 @@
+import fetcher from "../../utils/fetcher"
 import AuthContext from "./authContext"
 
 import { useState } from "react"
 
 const AuthState = ({ children }) => {
   const [auth, setAuth] = useState({
-    token: localStorage.getItem("token"),
+    user: {},
     isAuthenticated: null,
     loading: true,
-    user: null,
     error: null,
   })
 
   // TODO
-  const register = () => {}
+  const register = async (formData) => {
+    // username email and password
+
+    const data = await fetcher("/users", "POST", {}, formData)
+
+    localStorage.setItem("userInfo", JSON.stringify(data))
+    setAuth({
+      ...auth,
+      isAuthenticated: true,
+      user: JSON.parse(localStorage.getItem("userInfo")),
+      loading: false,
+    })
+  }
 
   // TODO
-  const login = () => {}
+  const login = async (formData) => {
+    // we get email and password
+    const data = await fetcher("/auth/login", "POST", {}, formData)
+
+    localStorage.setItem("userInfo", JSON.stringify(data))
+    setAuth({
+      ...auth,
+      isAuthenticated: true,
+      user: JSON.parse(localStorage.getItem("userInfo")),
+      loading: false,
+    })
+  }
 
   // TODO
-  const loadUser = () => {}
+  const loadUser = () => {
+    const user = localStorage.getItem("userInfo") || {}
+  }
 
   // TODO
-  const logout = () => {}
+  const logout = () => {
+    localStorage.removeItem("userInfo")
+    setAuth({ ...auth, isAuthenticated: false })
+  }
 
   // TODO
   const clearErrors = () => {}

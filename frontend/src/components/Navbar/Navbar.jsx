@@ -1,9 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import AuthContext from "../../context/auth/authContext"
 
 import "./navbar.css"
 
 const Navbar = () => {
+  const authContext = useContext(AuthContext)
+  const { user } = authContext
+  console.log(user)
   return (
     <nav className="bg-white drop-shadow-md">
       <div className="container mx-auto px-8">
@@ -40,13 +45,17 @@ const Navbar = () => {
               Contact
               <span className="underline"></span>
             </Link>
-            <Link
-              to="/signin"
-              className="text-gray-900 px-4 py-2 relative overflow-hidden"
-            >
-              Log In
-              <span className="underline"></span>
-            </Link>
+            {user ? (
+              <div>{user}</div>
+            ) : (
+              <Link
+                to="/signin"
+                className="text-gray-900 px-4 py-2 relative overflow-hidden"
+              >
+                Log In
+                <span className="underline"></span>
+              </Link>
+            )}
             {/* <Link to="/signup" className="text-gray-900 px-4 py-2 relative overflow-hidden">
               Sign Up
               <span className="underline"></span>

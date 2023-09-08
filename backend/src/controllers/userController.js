@@ -3,7 +3,7 @@ import { matchPassword, encrypt } from "../utils/auth.js"
 import generateToken from "../utils/generateToken.js"
 
 // auth user
-const authUser = async (req, res) => {
+const authUser = async (req, res, next) => {
   const { email, password } = req.body
 
   try {
@@ -22,7 +22,7 @@ const authUser = async (req, res) => {
     }
   } catch (err) {
     res.status(401)
-    throw new Error("Invalid email or password")
+    next(new Error("Invalid email or password"))
   }
 }
 
@@ -62,6 +62,23 @@ const registerUser = async (req, res, next) => {
 }
 
 // Get user profile
-const getUserProfile = async (req, res) => {}
+const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.user.id,
+      },
+      select: {
+        email: true,
+        username: true,
+        id: true,
+      },
+    })
+    res.status(200).json(user)
+  } catch (err) {
+    console.log(err)
+    next(new Error("Invalid User"))
+  }
+}
 
 export { authUser, registerUser, getUserProfile }

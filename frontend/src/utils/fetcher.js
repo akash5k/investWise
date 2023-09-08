@@ -1,19 +1,21 @@
-const base_url = process.env.REACT_APP_BACKEND_URL
+const base_url =
+  "http://localhost:5000/api" || process.env.REACT_APP_BACKEND_URL
 
-const fetcher = async (url, method, data) => {
+const fetcher = async (url, method, customHeader, data = null) => {
   const config = {
-    method,
+    method: method,
     headers: {
       "Content-Type": "application/json",
+      ...customHeader,
     },
-    body: JSON.stringify(data),
   }
+  if (data) config.body = JSON.stringify(data)
   try {
     const res = await fetch(base_url + url, config)
-    const d = await res.json()
-    return d
+    const result = await res.json()
+    return result
   } catch (err) {
-    return err
+    return err.message
   }
 }
 
