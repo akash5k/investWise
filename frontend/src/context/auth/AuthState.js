@@ -4,10 +4,12 @@ import AuthContext from "./authContext"
 import { useState } from "react"
 
 const AuthState = ({ children }) => {
+  const User = JSON.parse(localStorage.getItem("userInfo")) || {}
+  const Token = User.token
   const [auth, setAuth] = useState({
-    user: {},
-    isAuthenticated: null,
-    loading: true,
+    user: User,
+    isAuthenticated: Token ? true : false,
+    loading: User ? false : true,
     error: null,
   })
 
@@ -15,7 +17,7 @@ const AuthState = ({ children }) => {
   const register = async (formData) => {
     // username email and password
 
-    const data = await fetcher("/users", "POST", {}, formData)
+    const data = await fetcher("/users/register", "POST", {}, formData)
 
     localStorage.setItem("userInfo", JSON.stringify(data))
     setAuth({
@@ -29,15 +31,18 @@ const AuthState = ({ children }) => {
   // TODO
   const login = async (formData) => {
     // we get email and password
-    const data = await fetcher("/auth/login", "POST", {}, formData)
-
-    localStorage.setItem("userInfo", JSON.stringify(data))
-    setAuth({
-      ...auth,
-      isAuthenticated: true,
-      user: JSON.parse(localStorage.getItem("userInfo")),
-      loading: false,
-    })
+    try {
+      const data = await fetcher("/users/login", "POST", {}, formData)
+      localStorage.setItem("userInfo", JSON.stringify(data))
+      setAuth({
+        ...auth,
+        isAuthenticated: true,
+        user: JSON.parse(localStorage.getItem("userInfo")),
+        loading: false,
+      })
+    } catch (err) {
+      alert(err.message)
+    }
   }
 
   // TODO

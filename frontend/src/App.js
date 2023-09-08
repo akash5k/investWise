@@ -5,6 +5,7 @@ import Hero from "./components/Hero/hero"
 import SignIn from "./components/SignIn/SignIn" // Updated import statement
 import AuthState from "./context/auth/AuthState"
 import Dashboard from "./pages/Dashboard"
+import Private from "./components/Private"
 
 function App() {
   return (
@@ -16,7 +17,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/signIn" element={<SignIn />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <Private>
+                  <Dashboard />
+                </Private>
+              }
+            />
             {/* Updated component name */}
             {/* Add other routes as needed */}
           </Routes>

@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import AuthContext from "../../context/auth/authContext"
 
@@ -7,8 +7,13 @@ import "./navbar.css"
 
 const Navbar = () => {
   const authContext = useContext(AuthContext)
-  const { user } = authContext
-  console.log(user)
+  const { user, isAuthenticated, logout } = authContext
+  const navigate = useNavigate()
+
+  const logoutHandler = () => {
+    logout()
+    navigate("/")
+  }
   return (
     <nav className="bg-white drop-shadow-md">
       <div className="container mx-auto px-8">
@@ -45,21 +50,36 @@ const Navbar = () => {
               Contact
               <span className="underline"></span>
             </Link>
-            {user ? (
-              <div>{user}</div>
+            {isAuthenticated ? (
+              <div>
+                <button className="text-gray-900 px-4 py-2 relative overflow-hidden">
+                  {user.username || "User"}
+                </button>
+                <button
+                  onClick={logoutHandler}
+                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
-              <Link
-                to="/signin"
-                className="text-gray-900 px-4 py-2 relative overflow-hidden"
-              >
-                Log In
-                <span className="underline"></span>
-              </Link>
+              <div className="my-auto">
+                <Link
+                  to="/signin"
+                  className="bg-transparent hover:bg-blue-500 mx-2 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                >
+                  Log In
+                  <span className="underline"></span>
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                >
+                  Sign Up
+                  <span className="underline"></span>
+                </Link>
+              </div>
             )}
-            {/* <Link to="/signup" className="text-gray-900 px-4 py-2 relative overflow-hidden">
-              Sign Up
-              <span className="underline"></span>
-            </Link> */}
           </div>
         </div>
       </div>
