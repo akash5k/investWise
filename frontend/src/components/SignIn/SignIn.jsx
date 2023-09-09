@@ -4,12 +4,13 @@ import { authbanner } from "../../assets"
 import { useContext } from "react"
 import AuthContext from "../../context/auth/authContext"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const SignIn = () => {
   const authContext = useContext(AuthContext)
-  const { login, error, isAuthenticated } = authContext
+  const { login, error, clearErrors, isAuthenticated } = authContext
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -17,10 +18,14 @@ const SignIn = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (error) {
+      toast.error(error)
+      clearErrors()
+    }
+    if (!error && isAuthenticated) {
       navigate("/dashboard")
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, error])
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value })

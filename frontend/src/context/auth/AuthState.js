@@ -4,22 +4,22 @@ import AuthContext from "./authContext"
 import { useState } from "react"
 
 const AuthState = ({ children }) => {
-  const User = JSON.parse(localStorage.getItem("userInfo")) || {}
-  const Token = User.token
+  const User = JSON.parse(localStorage.getItem("userInfo")) || null
+  const Token = User?.token || null
   const [auth, setAuth] = useState({
     user: User,
     isAuthenticated: Token ? true : false,
     loading: User ? false : true,
     error: null,
   })
-
+  console.log(auth)
   // TODO
   const register = async (formData) => {
     // username email and password
 
     const data = await fetcher("/users/register", "POST", {}, formData)
 
-    localStorage.setItem("userInfo", JSON.stringify(data))
+    localStorage.setItem("userInfo", JSON.stringify(data.data))
     setAuth({
       ...auth,
       isAuthenticated: true,
@@ -31,18 +31,19 @@ const AuthState = ({ children }) => {
   // TODO
   const login = async (formData) => {
     // we get email and password
-    try {
-      const data = await fetcher("/users/login", "POST", {}, formData)
-      localStorage.setItem("userInfo", JSON.stringify(data))
-      setAuth({
-        ...auth,
-        isAuthenticated: true,
-        user: JSON.parse(localStorage.getItem("userInfo")),
-        loading: false,
-      })
-    } catch (err) {
-      alert(err.message)
+
+    const data = await fetcher("/users/login", "POST", {}, formData)
+    if (data.error) {
+      setAuth({ ...auth, error: data.error })
+      return
     }
+    localStorage.setItem("userInfo", JSON.stringify(data))
+    setAuth({
+      ...auth,
+      isAuthenticated: true,
+      user: JSON.parse(localStorage.getItem("userInfo")),
+      loading: false,
+    })
   }
 
   // TODO
@@ -57,7 +58,9 @@ const AuthState = ({ children }) => {
   }
 
   // TODO
-  const clearErrors = () => {}
+  const clearErrors = () => {
+    setAuth({ ...auth, error: null })
+  }
   return (
     <AuthContext.Provider
       value={{
