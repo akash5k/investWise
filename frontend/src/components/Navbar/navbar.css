@@ -1,0 +1,27 @@
+.nav_item{
+    @apply text-gray-900 hover:bg-gray-700 hover:text-white px-4 py-2 rounded
+}
+
+a {
+    @apply no-underline tracking-widest uppercase
+}
+
+ 
+a::after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    background: #000;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  a:hover:after { 
+    width: 100%; 
+    left: 0; 
+  }
+ 
+  
