@@ -1,0 +1,47 @@
+[
+    {
+      "title": "Education",
+      "subcategories": [
+        "College Fees",
+        "Textbooks and Learning Material",
+        "Online Courses",
+        "Private Tutoring",
+        "Educational Software and Tools",
+        "Miscellaneous"
+      ]
+    },
+    {
+      "title": "Skill Building",
+      "subcategories": [
+        "Courses and Workshops",
+        "Certificates and Licenses",
+        "Software and Tools",
+        "Subscription Services",
+        "Travel for Skill Improvement"
+      ]
+    },
+    {
+      "title": "Yourself",
+      "subcategories": [
+        "Health and Wellness",
+        "Personal Development Books",
+        "Hobbies and Interests",
+        "Mental Health Services",
+        "Travel for Personal Growth",
+        "Volunteer and Charity",
+        "Lifestyle and Wellbeing"
+      ]
+    },
+    {
+      "title": "Financial Investments",
+      "subcategories": [
+        "Stocks",
+        "Bonds",
+        "Mutual Funds",
+        "ETFs",
+        "Real Estate",
+        "Cryptocurrency"
+      ]
+    }
+  ]
+  
