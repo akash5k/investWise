@@ -31,14 +31,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/signIn" element={<SignIn />} />
+
             <Route
               path="/dashboard"
-              element={
-                <Private>
-                  <Dashboard />
-                </Private>
-              }
+              element={<Private component={<Dashboard />} />}
             />
+
             {/* Updated component name */}
             {/* Add other routes as needed */}
           </Routes>

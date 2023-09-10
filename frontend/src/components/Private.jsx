@@ -9,10 +9,11 @@ const Private = (props) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
+      console.log(isAuthenticated)
       navigate("/")
     }
   }, [isAuthenticated])
-  return <>{props.chilren}</>
+  return <>{props.component}</>
 }
 
 export default Private
