@@ -19,7 +19,7 @@ const fetcher = async (url, method, customHeader, data = null) => {
       return { error: result.message }
     }
   } catch (err) {
-    console.log("error")
+    return { error: "Some Error Occured" }
   }
 }
 
