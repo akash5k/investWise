@@ -1,32 +1,45 @@
-import React from "react";
-import { useState } from "react";
+import React from "react"
+import { useState } from "react"
 
-import "chart.js/auto";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import "chart.js/auto"
+import { Bar, Line, Pie } from "react-chartjs-2"
 
-import Tabs from "../components/Tabs/Tabs";
-import InvestmentModal from "../components/Modal/InvestmentModal";
+import Tabs from "../components/Tabs/Tabs"
+import InvestmentModal from "../components/Modal/InvestmentModal"
 
 //replace the dummy data with the data from the backend
-const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",}) => {
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const Dashboard = ({
+  username = "User",
+  totalProfit = "700",
+  avgGrowth = "78",
+}) => {
+  console.log("Hello")
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => {
-    setIsModalOpen(true);
-  };
+    setIsModalOpen(true)
+  }
   const closeModal = () => {
-    setIsModalOpen(false);
-  };
+    setIsModalOpen(false)
+  }
 
   //Dummy data
   const investmentData = {
-    labels: ["Education", "Skill Building", "Financial Investments", "Health", "Housing", "Food", "Transportation", "Others"],
+    labels: [
+      "Education",
+      "Skill Building",
+      "Financial Investments",
+      "Health",
+      "Housing",
+      "Food",
+      "Transportation",
+      "Others",
+    ],
     datasets: [
       {
         label: "Invested",
-        data: [30, 40, 30 , 20, 10 , 88 , 40 , 70],
-        backgroundColor: 'rgba(75, 192, 192,0.5)',
+        data: [30, 40, 30, 20, 10, 88, 40, 70],
+        backgroundColor: "rgba(75, 192, 192,0.5)",
         barThickness: 40,
         fill: true,
         tension: 0.3,
@@ -34,7 +47,7 @@ const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",})
       {
         label: "Total",
         data: [50, 60, 70, 80, 90, 50, 110, 120],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
         barThickness: 40,
         fill: true,
         tension: 0.3,
@@ -43,12 +56,12 @@ const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",})
     options: {
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
+          beginAtZero: true,
+        },
+      },
     },
-  };
-  
+  }
+
   return (
     <div className="relative flex flex-col bg-gray-100 py-6 px-12 lg:flex lg:items-center">
       <div className="flex flex-row justify-between w-full">
@@ -95,7 +108,7 @@ const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",})
         <Tabs />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

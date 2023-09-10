@@ -13,9 +13,13 @@ const fetcher = async (url, method, customHeader, data = null) => {
   try {
     const res = await fetch(base_url + url, config)
     const result = await res.json()
-    return result
+    if (res.ok) {
+      return { data: result }
+    } else {
+      return { error: result.message }
+    }
   } catch (err) {
-    return err.message
+    return { error: "Some Error Occured" }
   }
 }
 

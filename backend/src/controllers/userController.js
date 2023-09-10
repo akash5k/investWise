@@ -12,14 +12,18 @@ const authUser = async (req, res, next) => {
         email: email,
       },
     })
+    if (!user) {
+      next(new Error("Invalid email or password"))
+    }
     if (user && (await matchPassword(password, user.password))) {
-      res.status(200).json({
+      return res.status(200).json({
         id: user.id,
         username: user.username,
         email: user.email,
         token: generateToken(user.id),
       })
     }
+    next(new Error("Invalid email or password"))
   } catch (err) {
     res.status(401)
     next(new Error("Invalid email or password"))
