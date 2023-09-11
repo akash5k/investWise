@@ -11,9 +11,49 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  username  String?
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  id         String       @id @default(uuid())
+  username   String?
+  email      String       @unique
+  password   String
+  createdAt  DateTime     @default(now())
+  Investment Investment[]
+}
+
+model InvestmentParameter {
+  id          String                     @id @default(uuid())
+  name        String
+  selfWeight  Float
+  childParams InvestmentChildParameter[]
+  investments Investment[]
+}
+
+model InvestmentChildParameter {
+  id           String              @id @default(uuid())
+  name         String
+  selfWeight   Float
+  parent       InvestmentParameter @relation(fields: [parentId], references: [id])
+  parentId     String
+  Investment   Investment?         @relation(fields: [investmentId], references: [id])
+  investmentId String?
+}
+
+model Investment {
+  id             String                     @id @default(uuid())
+  userId         String
+  parameterId    String
+  childId        String?
+  amount         Float
+  date           DateTime
+  user           User                       @relation(fields: [userId], references: [id])
+  parameter      InvestmentParameter        @relation(fields: [parameterId], references: [id])
+  childParameter InvestmentChildParameter[]
+  returnID       String                     @unique
+  return         Return                     @relation(fields: [returnID], references: [id])
+}
+
+model Return {
+  id           String      @id @default(uuid())
+  investmentId String
+  amount       Float
+  investment   Investment?
 }
