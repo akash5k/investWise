@@ -5,7 +5,7 @@ import { banner } from "../../assets";
 const Hero = () => {
   return (
     <div className="relative h-[90vh] bg-gray-100 py-12 pl-12 lg:flex lg:items-center">
-      <div className="lg:w-1/2">
+      <div className="lg:w-1/3">
         <h1 className="text-4xl font-bold mb-4">Invest Wiser .</h1>
         <p className="text-lg text-gray-500 mb-6">
           A catchy subtitle or description goes here.
@@ -18,7 +18,7 @@ const Hero = () => {
         </button>
       </div>
 
-      <div className="lg:w-1/2 lg:mt-0 mt-8 relative">
+      <div className="lg:w-2/3 lg:mt-0 mt-8 relative">
         <img
           src={banner}
           alt="Hero Image"

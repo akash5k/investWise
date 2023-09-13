@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from "react"
-import { FcGoogle } from "react-icons/fc"
-import { authbanner } from "../../assets"
-import { useContext } from "react"
-import AuthContext from "../../context/auth/authContext"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { authbanner } from "../../assets";
+import { useContext } from "react";
+import AuthContext from "../../context/auth/authContext";
+import { useNavigate } from "react-router-dom";
 
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const SignIn = () => {
-  const authContext = useContext(AuthContext)
-  const { login, error, isAuthenticated } = authContext
+  const authContext = useContext(AuthContext);
+  const { login, error, isAuthenticated } = authContext;
   const [user, setUser] = useState({
     email: "",
     password: "",
-  })
-  const navigate = useNavigate()
+  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard")
+      navigate("/dashboard");
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated]);
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
-  const { email, password } = user
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  const { email, password } = user;
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (email === "" || password === "") {
-      alert("Please fill in all fields", "danger")
+      alert("Please fill in all fields", "danger");
     } else {
       login({
         email,
         password,
-      })
+      });
     }
-  }
+  };
   return (
     <div className="flex h-[90vh] ">
       {/* Left side with the image */}
@@ -44,14 +44,16 @@ const SignIn = () => {
         className="hidden lg:block bg-cover bg-center w-1/2"
         style={{ backgroundImage: `url(${authbanner})` }}
       ></div>
-<div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
-          <h1 className="text-5xl font-bold uppercase tracking-[0.4rem]">Investwise</h1>
-          <div className="flex items-center justify-center space-x-4 mt-4 gap-4">           
-            <FaFacebook className="text-3xl" />
-            <FaInstagram className="text-3xl" />
-            <FaTwitter className="text-3xl" />
-          </div>
+      <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+        <h1 className="text-5xl font-bold uppercase tracking-[0.4rem]">
+          Investwise
+        </h1>
+        <div className="flex items-center justify-center space-x-4 mt-4 gap-4">
+          <FaFacebook className="text-3xl" />
+          <FaInstagram className="text-3xl" />
+          <FaTwitter className="text-3xl" />
         </div>
+      </div>
       {/* Right side with the login form */}
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-md px-8 py-6 ">
@@ -123,7 +125,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
