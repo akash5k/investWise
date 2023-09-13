@@ -53,7 +53,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <div>
                 <button className="text-gray-900 px-4 py-2 relative overflow-hidden">
-                  {user.username || "User"}
+                  {user.username}
                 </button>
                 <button
                   onClick={logoutHandler}
