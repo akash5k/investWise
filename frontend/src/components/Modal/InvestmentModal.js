@@ -16,10 +16,8 @@ const InvestmentModal = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md">
-          <div className="relative w-screen max-w-3xl p-6 bg-white rounded-lg shadow-lg">
-            {/*content*/}
-            <div className="border-0 flex flex-col w-full outline-none focus:outline-none">
-              {/*header*/}
+          <div className="relative w-screen max-w-3xl p-6 bg-white rounded-lg shadow-lg">            
+            <div className="border-0 flex flex-col w-full outline-none focus:outline-none">              
               <div className="flex items-start justify-between mb-2">
                 <h3 className="text-3xl font-semibold">
                   Add New Investment
@@ -33,7 +31,6 @@ const InvestmentModal = ({ isOpen, onClose }) => {
                   </span>
                 </button>
               </div>
-              {/*body*/}
               <div className="relative p-6">
                 <form>
                   <div className="mb-4 relative">
@@ -91,6 +88,7 @@ const InvestmentModal = ({ isOpen, onClose }) => {
                       name="Subcategory"
                       id="subcategory"
                       value={selectedSubcategory}
+                      onChange={(event) => setSelectedSubcategory(event.target.value)}
                       className="w-full px-4 py-2 mt-2 border rounded-full border-black focus:outline-none focus:ring-1 focus:ring-blue-600"
                     >
                       <option value="" disabled>

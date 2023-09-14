@@ -1,18 +1,26 @@
 import React from "react";
 import { useState } from "react";
+import { useContext } from "react";
+import AuthContext from "../context/auth/authContext";
 
 import "chart.js/auto";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import Tabs from "../components/Tabs/Tabs";
 import InvestmentModal from "../components/Modal/InvestmentModal";
 import categoriesData from "../components/Tabs/categories.json"
 
-//replace the dummy data with the data from the backend
-const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",}) => {
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
+const Dashboard = () => {
+  
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
+
+//dummy data
+  const totalProfit = 1000;
+  const avgGrowth = 10;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -49,7 +57,7 @@ const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",})
     options: {
       scales: {
         x: {
-          type: 'category', // If your X-axis contains category labels
+          type: 'category', 
           ticks: {
           },
         },
@@ -64,7 +72,7 @@ const Dashboard = ({ username = "User", totalProfit = "700", avgGrowth = "78",})
     <div className="relative flex flex-col bg-gray-100 py-6 px-12 lg:flex lg:items-center">
       <div className="flex flex-row justify-between w-full">
         <div className="text-xl font-bold text-gray-900 lg:w-1/2">
-          Hi {username}
+          Hi {user.username || "User"}
         </div>
         <div className="flex flex-row gap-4">
           <div className="flex flex-col items-center">
