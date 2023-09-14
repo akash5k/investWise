@@ -28,7 +28,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Menu */}
           <div className="md:flex space-x-4">
             <Link
               to="/"
@@ -74,7 +73,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/signup"
-                  className="bg-transparent hover:bg-black text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded"
+                  className="bg-black text-white hover:bg-transparent font-semibold hover:text-black py-2 px-4 border border-black hover:border-black rounded"
                 >
                   Sign Up
                   <span className="underline"></span>
