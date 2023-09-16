@@ -1,19 +1,19 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../../context/auth/authContext";
+import React from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useContext } from "react"
+import AuthContext from "../../context/auth/authContext"
 
-import "./Navbar.css";
+import "./navbar.css"
 
 const Navbar = () => {
-  const authContext = useContext(AuthContext);
-  const { user, isAuthenticated, logout } = authContext;
-  const navigate = useNavigate();
+  const authContext = useContext(AuthContext)
+  const { user, isAuthenticated, logout } = authContext
+  const navigate = useNavigate()
 
   const logoutHandler = () => {
-    logout();
-    navigate("/");
-  };
+    logout()
+    navigate("/")
+  }
 
   return (
     <nav className="bg-white drop-shadow-md">
@@ -84,7 +84,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
