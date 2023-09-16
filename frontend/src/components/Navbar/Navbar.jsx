@@ -14,6 +14,7 @@ const Navbar = () => {
     logout()
     navigate("/")
   }
+
   return (
     <nav className="bg-white drop-shadow-md">
       <div className="container mx-auto px-8">
@@ -27,7 +28,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Menu */}
           <div className="md:flex space-x-4">
             <Link
               to="/"
@@ -52,12 +52,12 @@ const Navbar = () => {
             </Link>
             {isAuthenticated ? (
               <div>
-                <button className="text-gray-900 px-4 py-2 relative overflow-hidden">
+                <button className="text-black px-4 py-2 relative overflow-hidden">
                   {user.username || "User"}
                 </button>
                 <button
                   onClick={logoutHandler}
-                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  className="bg-transparent hover:bg-black text-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded"
                 >
                   Logout
                 </button>
@@ -66,14 +66,14 @@ const Navbar = () => {
               <div className="my-auto">
                 <Link
                   to="/signin"
-                  className="bg-transparent hover:bg-blue-500 mx-2 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  className="bg-transparent hover:bg-black text-black font-semibold hover:text-white py-2 px-4 mr-2 border border-black hover:border-transparent rounded"
                 >
                   Log In
                   <span className="underline"></span>
                 </Link>
                 <Link
                   to="/signup"
-                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  className="bg-black text-white hover:bg-transparent font-semibold hover:text-black py-2 px-4 border border-black hover:border-black rounded"
                 >
                   Sign Up
                   <span className="underline"></span>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { FcGoogle } from "react-icons/fc"
 import { authbanner } from "../../assets"
 import { useContext } from "react"
@@ -6,7 +7,7 @@ import AuthContext from "../../context/auth/authContext"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa"
 
 const SignIn = () => {
   const authContext = useContext(AuthContext)
@@ -49,14 +50,16 @@ const SignIn = () => {
         className="hidden lg:block bg-cover bg-center w-1/2"
         style={{ backgroundImage: `url(${authbanner})` }}
       ></div>
-<div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
-          <h1 className="text-5xl font-bold uppercase tracking-[0.4rem]">Investwise</h1>
-          <div className="flex items-center justify-center space-x-4 mt-4 gap-4">           
-            <FaFacebook className="text-3xl" />
-            <FaInstagram className="text-3xl" />
-            <FaTwitter className="text-3xl" />
-          </div>
+      <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+        <h1 className="text-5xl font-bold uppercase tracking-[0.4rem]">
+          Investwise
+        </h1>
+        <div className="flex items-center justify-center space-x-4 mt-4 gap-4">
+          <FaFacebook className="text-3xl" />
+          <FaInstagram className="text-3xl" />
+          <FaTwitter className="text-3xl" />
         </div>
+      </div>
       {/* Right side with the login form */}
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-md px-8 py-6 ">
@@ -80,7 +83,6 @@ const SignIn = () => {
                 />
               </div>
               <div className="mt-4">
-                {/* <label className="block">Password</label> */}
                 <input
                   className="w-full px-4 py-2 mt-2 border rounded-xl border-black focus:outline-none focus:ring-1 focus:ring-blue-600"
                   placeholder="Password"
@@ -91,12 +93,6 @@ const SignIn = () => {
                   required
                 />
               </div>
-              {/* <a
-                href="#"
-                className="text-xs text-blue-600 hover:underline mt-4"
-              >
-                Forgot password?
-              </a> */}
               <button
                 type="submit"
                 className="px-6 py-2 w-full mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
@@ -116,12 +112,12 @@ const SignIn = () => {
                 <span className="text-sm font-normal text-gray-500">
                   Not a member ?
                 </span>
-                <a
-                  href="/signup"
+                <Link
+                  to="/signup"
                   className="text-xs text-blue-600 hover:underline"
                 >
                   Sign up now
-                </a>
+                </Link>
               </div>
             </div>
           </form>
