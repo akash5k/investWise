@@ -1,8 +1,14 @@
-import React from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
-import { banner } from "../../assets";
+import React, { useContext, useEffect } from "react"
+import { AiOutlineArrowRight } from "react-icons/ai"
+import { banner } from "../../assets"
+import AuthContext from "../../context/auth/authContext"
 
 const Hero = () => {
+  const authContext = useContext(AuthContext)
+
+  useEffect(() => {
+    authContext.loadUser()
+  }, [])
   return (
     <div className="relative h-[90vh] bg-gray-100 py-12 pl-12 lg:flex lg:items-center">
       <div className="lg:w-1/2">
@@ -27,7 +33,7 @@ const Hero = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

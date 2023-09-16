@@ -52,9 +52,13 @@ const Navbar = () => {
             </Link>
             {isAuthenticated ? (
               <div>
-                <button className="text-gray-900 px-4 py-2 relative overflow-hidden">
-                  {user.username}
-                </button>
+                <Link
+                  to="/dashboard"
+                  className="bg-transparent hover:bg-blue-500 mx-2 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                >
+                  Dashboard
+                  <span className="underline"></span>
+                </Link>
                 <button
                   onClick={logoutHandler}
                   className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"

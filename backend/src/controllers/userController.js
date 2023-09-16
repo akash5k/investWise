@@ -12,6 +12,7 @@ const authUser = async (req, res, next) => {
         email: email,
       },
     })
+    console.log(user)
     if (!user) {
       next(new Error("Invalid email or password"))
     }
