@@ -1,54 +1,43 @@
 import React from "react"
 import { useState } from "react"
-import { useContext } from "react";
-import AuthContext from "../context/auth/authContext";
+import { useContext } from "react"
+import AuthContext from "../context/auth/authContext"
 
 import "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
-import Tabs from "../components/Tabs/Tabs";
-import InvestmentModal from "../components/Modal/InvestmentModal";
+import Tabs from "../components/Tabs/Tabs"
+import InvestmentModal from "../components/Modal/InvestmentModal"
 import categoriesData from "../components/Tabs/categories.json"
 
-
 const Dashboard = () => {
-  
-  const authContext = useContext(AuthContext);
-  const { user } = authContext;
+  const authContext = useContext(AuthContext)
+  const { user } = authContext
 
-//dummy data
-  const totalProfit = 1000;
-  const avgGrowth = 10;
+  //dummy data
+  const totalProfit = 1000
+  const avgGrowth = 10
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => {
     setIsModalOpen(true)
   }
   const closeModal = () => {
     setIsModalOpen(false)
   }
-  
- //get the labels from the categories.json file
- const labesl = categoriesData.map((category) => category.title);
- console.log(labesl);
+
+  //get the labels from the categories.json file
+  const labesl = categoriesData.map((category) => category.title)
+  console.log(labesl)
 
   //Dummy data
   const investmentData = {
-    labels: [
-      "Education",
-      "Skill Building",
-      "Financial Investments",
-      "Health",
-      "Housing",
-      "Food",
-      "Transportation",
-      "Others",
-    ],
+    labels: labesl,
     datasets: [
       {
         label: "Invested",
-        data: [30, 40, 100 , 20],
-        backgroundColor: 'rgba(75, 192, 192,0.5)',
+        data: [30, 40, 100, 20],
+        backgroundColor: "rgba(75, 192, 192,0.5)",
         barThickness: 20,
         fill: true,
         tension: 0.3,
@@ -65,17 +54,14 @@ const Dashboard = () => {
     options: {
       scales: {
         x: {
-          type: 'category', 
-          ticks: {
-          },
+          type: "category",
+          ticks: {},
         },
         y: {
           beginAtZero: true,
         },
       },
-          beginAtZero: true,
-        },
-      },
+      beginAtZero: true,
     },
   }
 
@@ -113,7 +99,8 @@ const Dashboard = () => {
 
       <div className="w-full flex flex-col md:flex-row gap-6 py-6 ">
         <div className="w-full md:w-1/2 rounded-2xl shadow-md pt-2 pl-4 font-semibold bg-white mb-6 md:mb-0">
-          <span>Acount Activity</span><br/>
+          <span>Acount Activity</span>
+          <br />
           <span className="text-xs text-gray-400">Recent investments</span>
           {/* add recent investments by date */}
         </div>
