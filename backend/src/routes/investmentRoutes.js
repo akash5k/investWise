@@ -10,8 +10,8 @@ const router = express.Router()
 
 router.get("/getallparams", getAllParameters)
 
-router.get("/getAllInvestments", getAllInvestments)
+router.get("/getallinvestments", protect, getAllInvestments)
 
-router.post("/addinvestment", addInvestment)
+router.post("/addinvestment", protect, addInvestment)
 
 export default router

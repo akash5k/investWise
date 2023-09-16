@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useState } from "react"
 import { useContext } from "react"
 import AuthContext from "../context/auth/authContext"
@@ -8,11 +8,14 @@ import { Line } from "react-chartjs-2"
 
 import Tabs from "../components/Tabs/Tabs"
 import InvestmentModal from "../components/Modal/InvestmentModal"
-import categoriesData from "../components/Tabs/categories.json"
+import InvestmentContext from "../context/investment/investmentContext"
 
 const Dashboard = () => {
   const authContext = useContext(AuthContext)
+  const investmentContext = useContext(InvestmentContext)
   const { user } = authContext
+  const { parentLabels, getAllInvestments, investments, loading } =
+    investmentContext
 
   //dummy data
   const totalProfit = 1000
@@ -26,13 +29,14 @@ const Dashboard = () => {
     setIsModalOpen(false)
   }
 
-  //get the labels from the categories.json file
-  const labesl = categoriesData.map((category) => category.title)
-  console.log(labesl)
+  useEffect(() => {
+    getAllInvestments()
+    console.log(investments)
+  }, [loading])
 
   //Dummy data
   const investmentData = {
-    labels: labesl,
+    labels: parentLabels,
     datasets: [
       {
         label: "Invested",
@@ -101,7 +105,24 @@ const Dashboard = () => {
         <div className="w-full md:w-1/2 rounded-2xl shadow-md pt-2 pl-4 font-semibold bg-white mb-6 md:mb-0">
           <span>Acount Activity</span>
           <br />
-          <span className="text-xs text-gray-400">Recent investments</span>
+          <span className="text-xs text-gray-400">
+            {investments ? (
+              <>
+                <div className="flex">
+                  <ul>
+                    {investments.map((i) => (
+                      <li key={i.id}>
+                        Amount: Rs {i.amount}, Parameter: Rs {i.parameter.name},
+                        Child Parameter: Rs {i.childParameter.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            ) : (
+              "Add an investment to get started"
+            )}
+          </span>
           {/* add recent investments by date */}
         </div>
         <div className="w-full md:w-1/2 rounded-2xl shadow-md pt-2 pl-4 font-semibold bg-white">
