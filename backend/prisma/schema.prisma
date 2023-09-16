@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,9 +8,45 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  username  String?
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  id         String       @id @default(uuid())
+  username   String       @default("User")
+  email      String       @unique
+  password   String
+  createdAt  DateTime     @default(now())
+  Investment Investment[]
+}
+
+model InvestmentParameter {
+  id          String                     @id @default(uuid())
+  name        String
+  selfWeight  Float
+  investments Investment[]
+  childParams InvestmentChildParameter[]
+}
+
+model InvestmentChildParameter {
+  id          String              @id @default(uuid())
+  name        String
+  selfWeight  Float
+  parentId    String
+  investments Investment[]
+  parent      InvestmentParameter @relation(fields: [parentId], references: [id])
+}
+
+model Investment {
+  id             String                   @id @default(uuid())
+  userId         String
+  parameterId    String
+  childId        String
+  amount         Float
+  returnAmount   Float
+  childParameter InvestmentChildParameter @relation(fields: [childId], references: [id])
+  parameter      InvestmentParameter      @relation(fields: [parameterId], references: [id])
+  user           User                     @relation(fields: [userId], references: [id])
+}
+
+model Return {
+  id           String @id @default(uuid())
+  investmentId String
+  amount       Float
 }

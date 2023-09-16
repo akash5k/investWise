@@ -12,6 +12,7 @@ const authUser = async (req, res, next) => {
         email: email,
       },
     })
+    console.log(user)
     if (!user) {
       next(new Error("Invalid email or password"))
     }
@@ -52,13 +53,14 @@ const registerUser = async (req, res, next) => {
     })
 
     if (user) {
-      res.status(201).json({
+      return res.status(201).json({
         id: user.id,
         username: user.username,
         email: user.email,
         token: generateToken(user.id),
       })
     }
+    next(new Error("Some Erro Occured"))
   } catch (err) {
     res.status(400)
     next(new Error("Invalid user data"))

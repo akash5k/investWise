@@ -12,8 +12,8 @@ const AuthState = ({ children }) => {
     loading: User ? false : true,
     error: null,
   })
-  console.log(auth)
-  // TODO
+
+  // To register a new user
   const register = async (formData) => {
     // username email and password
 
@@ -28,7 +28,7 @@ const AuthState = ({ children }) => {
     })
   }
 
-  // TODO
+  // login a user
   const login = async (formData) => {
     // we get email and password
 
@@ -46,15 +46,27 @@ const AuthState = ({ children }) => {
     })
   }
 
-  // TODO
-  const loadUser = () => {
-    const user = localStorage.getItem("userInfo") || {}
+  // To load a user from local storage
+  const loadUser = async () => {
+    const user = JSON.parse(localStorage.getItem("userInfo")) || {}
+    const data = await fetcher("/users/getUser", "GET", {
+      Authorization: `Bearer ${user?.data?.token || ""}`,
+    })
+    if (data.error) {
+      logout()
+      return
+    }
+    setAuth({
+      ...auth,
+      isAuthenticated: true,
+      loading: false,
+    })
   }
 
   // TODO
   const logout = () => {
     localStorage.removeItem("userInfo")
-    setAuth({ ...auth, isAuthenticated: false })
+    setAuth({ ...auth, user: null, isAuthenticated: false })
   }
 
   // TODO

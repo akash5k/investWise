@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken"
-import prisma from "../utils/prisma.js"
 
 const protect = async (req, res, next) => {
   let token
@@ -12,15 +11,13 @@ const protect = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
       const user = { id: decoded.id }
       req.user = user
-
       next()
     } catch (error) {
       console.error(error)
       res.status(401)
       next(new Error("Not authorized, token failed"))
     }
-  }
-  if (!token) {
+  } else {
     res.status(401)
     next(new Error("Not Authorized, no token"))
   }
