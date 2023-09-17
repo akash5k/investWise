@@ -42,11 +42,9 @@ const About = () => {
             alt="Contributor 1"
             className="w-24 h-24 rounded-full object-cover transition duration-200 hover:scale-110 mx-auto"
           />
-          <div className="text-gray-900 text-lg font-bold pt-4">
+          <div className="text-gray-900 text-lg font-bold p-4">
             Akash Parida
           </div>
-          <div className="text-purple-600">Role</div>
-          <div className="text-gray-600">Contribution</div>
           <div className="flex items-center justify-center gap-3 mt-2 w-auto h-5 text-gray-600">
             <FaLinkedin className="cursor-pointer transition duration-200 hover:text-black" />
             <BsGithub className="cursor-pointer transition duration-200 hover:text-black" />
@@ -60,11 +58,9 @@ const About = () => {
             alt="Contributor 2"
             className="w-24 h-24 rounded-full object-cover transition duration-200 hover:scale-110 mx-auto"
           />
-          <div className="text-gray-900 text-lg font-bold pt-4">
+          <div className="text-gray-900 text-lg font-bold p-4">
             Gursimrat Singh Kalra
           </div>
-          <div className="text-purple-600">Role</div>
-          <div className="text-gray-600">Contribution</div>
           <div className="flex items-center justify-center gap-3 mt-2 w-auto h-5 text-gray-600">
             <FaLinkedin className="cursor-pointer transition duration-200 hover:text-black" />
             <BsGithub className="cursor-pointer transition duration-200 hover:text-black" />

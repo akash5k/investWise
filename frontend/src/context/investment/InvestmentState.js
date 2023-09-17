@@ -194,14 +194,14 @@ const InvestmentState = ({ children }) => {
     errors: null,
     loading: true,
   })
-  console.log("InvestState", investState)
+  // console.log("InvestState", investState)
 
   // get all investments of a user
   const getAllInvestments = async () => {
     const data = await fetcher("/invest/getallinvestments", "GET", {
       Authorization: `Bearer ${user?.token || ""}`,
     })
-    console.log(data)
+    // console.log(data)
     if (data.error) {
       setInvestState({ ...investState, error: data.error, loading: false })
       return
@@ -220,7 +220,7 @@ const InvestmentState = ({ children }) => {
       },
       { parentId, childId, amount, returnAmount }
     )
-    console.log(data)
+    // console.log(data)
     if (data.error) {
       setInvestState({ ...investState, error: data.error, loading: false })
       return

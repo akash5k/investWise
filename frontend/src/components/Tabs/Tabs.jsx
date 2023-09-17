@@ -1,37 +1,22 @@
-import React, { useContext, useState } from "react"
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import "react-tabs/style/react-tabs.css"
-import { Doughnut, Pie } from "react-chartjs-2"
-import InvestmentContext from "../../context/investment/investmentContext"
-
-// amount: 100000
-// childId: "7bd6931e-b349-4a3f-9ae2-a8a585c18220"
-// childParameter: {
-//   name: "College Fees"
-// }
-// id: "273bec7e-8061-4c47-a83c-c795ce04f1bf"
-// parameter: {
-//   name: "Education"
-// }
-// parameterId: "61a83700-d645-4b6f-b570-8be976b8ed61"
-// returnAmount: 1000000
+import React, { useContext } from "react";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import { Doughnut } from "react-chartjs-2";
+import InvestmentContext from "../../context/investment/investmentContext";
 
 function getData(subcategories, data) {
-  // Generate random data for numSubcategories temporary
-
-  let a = []
+  let a = [];
 
   for (let s of subcategories) {
-    console.log(s)
-    const obj = data.find((d) => d.childParameter.name === s.name) || 0
-    a.push(obj.amount * s.weight || 0)
+    const obj = data.find((d) => d.childParameter.name === s.name) || { amount: 0, returnAmount: 0 };
+    a.push(obj.amount * s.weight || 0);
   }
-  return a
+  return a;
 }
 
 function TabsComponent() {
-  const investmentContext = useContext(InvestmentContext)
-  const { parentLabels, LABELSDATA, investments } = investmentContext
+  const investmentContext = useContext(InvestmentContext);
+  const { parentLabels, LABELSDATA, investments } = investmentContext;
 
   return (
     <Tabs>
@@ -60,12 +45,26 @@ function TabsComponent() {
         </TabPanel>
       ))}
     </Tabs>
-  )
+  );
 }
 
 function Category({ title, subcategories, investmentData }) {
-  // Dummy data (replace with your actual data)
-  const data = getData(subcategories, investmentData)
+  const data = getData(subcategories, investmentData);
+
+  // Calculate subcategory totals directly within the Category component
+  const subCategoryTotal = {};
+
+  for (const investment of investmentData) {
+    const { amount, returnAmount, childParameter } = investment;
+    const subCategoryName = childParameter.name;
+
+    if (!subCategoryTotal[subCategoryName]) {
+      subCategoryTotal[subCategoryName] = { amount: 0, returnAmount: 0 };
+    }
+
+    subCategoryTotal[subCategoryName].amount += amount;
+    subCategoryTotal[subCategoryName].returnAmount += returnAmount;
+  }
 
   const ChartData = {
     labels: subcategories.map((s) => s.name),
@@ -82,16 +81,42 @@ function Category({ title, subcategories, investmentData }) {
         ],
       },
     ],
-  }
+  };
 
   return (
-    <div className="">
-      <h2 className="text-xl font-semibold mb-2">{title}</h2>
-      <div className="w-full md:w-1/3 mx-auto">
-        <Doughnut data={ChartData} id="chart" />
+    <div className="my-4">
+          {investmentData && investmentData.length > 0 ? (
+      <div className="flex flex-col md:flex-row md:w-3/4 mx-auto">
+        <div className="md:w-1/2">
+          <Doughnut data={ChartData} id="chart" />
+        </div>
+        <div className="md:w-1/2 my-auto md:pl-4 text-gray-600">
+            <table className="w-full text-center">
+              <thead>
+                <tr>
+                  <th className="text-black text-md">Sub Category</th>
+                  <th className="text-black text-md">Amount</th>
+                  <th className="text-black text-md">Return</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(subCategoryTotal).map((subCategoryName, index) => (
+                  <tr key={index}>
+                    <td>{subCategoryName}</td>
+                    <td>${subCategoryTotal[subCategoryName].amount}</td>
+                    <td>${subCategoryTotal[subCategoryName].returnAmount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            </div>
       </div>
+          ) : (
+            <p>No investment data available.</p>
+          )}
+        
     </div>
-  )
+  );
 }
 
-export default TabsComponent
+export default TabsComponent;
