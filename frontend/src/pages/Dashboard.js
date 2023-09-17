@@ -9,6 +9,7 @@ import { Line } from "react-chartjs-2"
 import Tabs from "../components/Tabs/Tabs"
 import InvestmentModal from "../components/Modal/InvestmentModal"
 import InvestmentContext from "../context/investment/investmentContext"
+import InvestmentReturnChart from "../components/Charts/InvestmentReturnChart"
 
 const Dashboard = () => {
   const authContext = useContext(AuthContext)
@@ -33,41 +34,6 @@ const Dashboard = () => {
     getAllInvestments()
     console.log(investments)
   }, [loading])
-
-  //Dummy data
-  const investmentData = {
-    labels: parentLabels,
-    datasets: [
-      {
-        label: "Invested",
-        data: [30, 40, 100, 20],
-        backgroundColor: "rgba(75, 192, 192,0.5)",
-        barThickness: 20,
-        fill: true,
-        tension: 0.3,
-      },
-      {
-        label: "Total",
-        data: [50, 60, 70, 50],
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        barThickness: 20,
-        fill: true,
-        tension: 0.3,
-      },
-    ],
-    options: {
-      scales: {
-        x: {
-          type: "category",
-          ticks: {},
-        },
-        y: {
-          beginAtZero: true,
-        },
-      },
-      beginAtZero: true,
-    },
-  }
 
   return (
     <div className="relative flex flex-col bg-gray-100 py-6 px-12 lg:flex lg:items-center">
@@ -126,8 +92,7 @@ const Dashboard = () => {
           {/* add recent investments by date */}
         </div>
         <div className="w-full md:w-1/2 rounded-2xl shadow-md pt-2 pl-4 font-semibold bg-white">
-          <span>Visualizer</span>
-          <Line data={investmentData} />
+          <InvestmentReturnChart />
         </div>
       </div>
 
