@@ -4,7 +4,7 @@ import { BsGithub } from "react-icons/bs";
 import { GoLinkExternal } from "react-icons/go";
 
 const About = () => {
-  return (
+  return (    
     <div className="w-full  p-8">
       <div className="w-full max-w-screen-md mx-auto text-center ">
         <h1 className="font-bold text-4xl ">InvestWise</h1>
