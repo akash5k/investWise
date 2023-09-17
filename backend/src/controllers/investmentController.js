@@ -19,24 +19,17 @@ export const getAllParameters = async (req, res, next) => {
 
 // adding an investment for a user
 export const addInvestment = async (req, res, next) => {
-  // const user = req.user.id
-
-  const user = "a604d256-3eb2-49d6-aafc-af1910c17a2e"
   // education parameter
-  const parentId = "f3955b85-f40a-45a9-85e2-1635b802f879"
-  // child parameter college fees
-  const childId = "051e1771-a9c6-423e-8c25-7a78171eeedb"
-  const amt = 1000
-  const returnAmt = 100000
+  const { parentId, childId, amount, returnAmount } = req.body
 
   try {
     const investment = await prisma.investment.create({
       data: {
-        userId: user,
+        userId: req.user.id,
         parameterId: parentId,
         childId: childId,
-        amount: amt,
-        returnAmount: returnAmt,
+        amount: +amount,
+        returnAmount: +returnAmount,
       },
     })
     res.status(201).json(investment)
@@ -48,4 +41,21 @@ export const addInvestment = async (req, res, next) => {
 }
 
 // get all investment of a user
-export const getAllInvestments = () => {}
+export const getAllInvestments = async (req, res, next) => {
+  try {
+    const investments = await prisma.investment.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      include: {
+        parameter: { select: { name: true } },
+        childParameter: { select: { name: true } },
+      },
+    })
+    res.status(200).json(investments)
+  } catch (err) {
+    console.log(err)
+    res.status(400)
+    next(new Error("Some Error Occured"))
+  }
+}

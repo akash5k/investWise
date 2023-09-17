@@ -37,7 +37,7 @@ const AuthState = ({ children }) => {
       setAuth({ ...auth, error: data.error })
       return
     }
-    localStorage.setItem("userInfo", JSON.stringify(data))
+    localStorage.setItem("userInfo", JSON.stringify(data.data))
     setAuth({
       ...auth,
       isAuthenticated: true,
@@ -50,7 +50,7 @@ const AuthState = ({ children }) => {
   const loadUser = async () => {
     const user = JSON.parse(localStorage.getItem("userInfo")) || {}
     const data = await fetcher("/users/getUser", "GET", {
-      Authorization: `Bearer ${user?.data?.token || ""}`,
+      Authorization: `Bearer ${user?.token || ""}`,
     })
     if (data.error) {
       logout()
