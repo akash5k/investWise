@@ -47,10 +47,10 @@ const SignIn = () => {
     <div className="flex h-[90vh] ">
       {/* Left side with the image */}
       <div
-        className="hidden lg:block bg-cover bg-center w-1/2"
+        className="hidden lg:block bg-cover bg-center w-1/2 "
         style={{ backgroundImage: `url(${authbanner})` }}
       ></div>
-      <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+      <div className="hidden md:block absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
         <h1 className="text-5xl font-bold uppercase tracking-[0.4rem]">
           Investwise
         </h1>
@@ -73,7 +73,7 @@ const SignIn = () => {
                   Email
                 </label> */}
                 <input
-                  className="w-full px-4 py-2 mt-2 border rounded-xl border-black focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-2 mt-2 border rounded-full border-black focus:outline-none focus:ring-1 focus:ring-blue-600"
                   type="email"
                   name="email"
                   value={email}
@@ -84,7 +84,7 @@ const SignIn = () => {
               </div>
               <div className="mt-4">
                 <input
-                  className="w-full px-4 py-2 mt-2 border rounded-xl border-black focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-2 mt-2 border rounded-full border-black focus:outline-none focus:ring-1 focus:ring-blue-600"
                   placeholder="Password"
                   type="password"
                   name="password"

@@ -1,23 +1,21 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
-import Navbar from "./components/Navbar/Navbar"
-import Hero from "./components/Hero/hero"
-import SignIn from "./components/SignIn/SignIn"
-import SignUp from "./components/SignUp/SignUp"
-import AuthState from "./context/auth/AuthState"
-import Dashboard from "./pages/Dashboard"
-import Private from "./components/Private"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+
+import Navbar from "./components/Navbar/Navbar"
+import AuthState from "./context/auth/AuthState"
 import InvestmentState from "./context/investment/InvestmentState"
+
+import AnimatedRoutes from "./components/AnimatedRoutes"
 
 function App() {
   return (
     <AuthState>
       <InvestmentState>
         <Router>
-          <div className="App">
+          <div className="App">         
             <Navbar />
             <ToastContainer
               position="top-right"
@@ -31,17 +29,8 @@ function App() {
               pauseOnHover
               theme="light"
             />
-            {/* Define your routes using the Routes component */}
-            <Routes>
-              <Route path="/" element={<Hero />} />
-              <Route path="/signIn" element={<SignIn />} />
-              <Route
-                path="/dashboard"
-                element={<Private component={<Dashboard />} />}
-              />
-              {/* Updated component name */}
-              {/* Add other routes as needed */}
-            </Routes>
+            {/* Find all routes in animatedRoutes */}
+            <AnimatedRoutes/>
           </div>
         </Router>
       </InvestmentState>
