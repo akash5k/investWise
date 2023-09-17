@@ -11,8 +11,8 @@ const Hero = () => {
     authContext.loadUser()
   }, [])
   return (
-    <div className="relative h-[90vh] bg-gray-100 py-12 pl-12 lg:flex lg:items-center">
-      <div className="lg:w-1/3">
+    <div className="relative h-[100vh] overflow-hidden md:h-[90vh] bg-gray-100 py-12 md:pl-12 lg:flex lg:items-center">
+      <div className="lg:w-1/3 pl-8 md:pl-0">
         <h1 className="text-7xl font-bold mb-4 uppercase">
           Invest <br />
           Wiser

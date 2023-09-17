@@ -7,10 +7,13 @@ import SignIn from "./components/SignIn/SignIn"
 import SignUp from "./components/SignUp/SignUp"
 import AuthState from "./context/auth/AuthState"
 import Dashboard from "./pages/Dashboard"
+import About from "./pages/About"
 import Private from "./components/Private"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import InvestmentState from "./context/investment/InvestmentState"
+import Contact from "./pages/Contact"
+
 
 function App() {
   return (
@@ -35,9 +38,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Hero />} />
               <Route path="/signIn" element={<SignIn />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
               <Route
                 path="/dashboard"
-                element={<Private component={<Dashboard />} />}
+                element={<Private component={<Dashboard />} />}                
               />
               {/* Updated component name */}
               {/* Add other routes as needed */}
