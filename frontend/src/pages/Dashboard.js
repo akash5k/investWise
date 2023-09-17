@@ -39,7 +39,7 @@ const Dashboard = () => {
     <div className="relative flex flex-col bg-gray-100 py-6 px-12 lg:flex lg:items-center">
       <div className="flex flex-row justify-between w-full">
         <div className="text-xl font-bold text-gray-900 lg:w-1/2">
-          Hi {user.username || "User"}
+          Hi {user?.username || "User"}
         </div>
         <div className="flex flex-row gap-4">
           <div className="flex flex-col items-center">
