@@ -27,7 +27,7 @@ const InvestmentReturnChart = () => {
       {
         label: "Invested",
         data: investData,
-        backgroundColor: "rgba(75, 192, 192,0.5)",
+        backgroundColor: "rgba(102, 155, 188,0.6)",
         barThickness: 20,
         fill: true,
         tension: 0.3,
@@ -35,7 +35,7 @@ const InvestmentReturnChart = () => {
       {
         label: "Return",
         data: ReturnData,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "rgba(88,129,87,0.6)",
         barThickness: 20,
         fill: true,
         tension: 0.3,

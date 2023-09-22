@@ -24,7 +24,7 @@ function AnimatedRoutes() {
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Hero />} />
-        <Route path="/signIn" element={<AnimateHolder><SignIn /></AnimateHolder>} />
+        <Route path="/signIn" element={<AnimateHolder><SignIn /></AnimateHolder>} />        
         <Route path="/signUp" element={<AnimateHolder><SignUp /></AnimateHolder>} />
         <Route path="/about" element={<AnimateHolder><About /></AnimateHolder>} />
         <Route path="/contact" element={<AnimateHolder><Contact /></AnimateHolder>} />

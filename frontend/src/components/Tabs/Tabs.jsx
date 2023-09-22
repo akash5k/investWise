@@ -51,7 +51,6 @@ function TabsComponent() {
 function Category({ title, subcategories, investmentData }) {
   const data = getData(subcategories, investmentData);
 
-  // Calculate subcategory totals directly within the Category component
   const subCategoryTotal = {};
 
   for (const investment of investmentData) {
@@ -82,41 +81,53 @@ function Category({ title, subcategories, investmentData }) {
       },
     ],
   };
-
+  
   return (
     <div className="my-4">
-          {investmentData && investmentData.length > 0 ? (
-      <div className="flex flex-col md:flex-row md:w-3/4 mx-auto">
-        <div className="md:w-1/2">
-          <Doughnut data={ChartData} id="chart" />
-        </div>
-        <div className="md:w-1/2 my-auto md:pl-4 text-gray-600">
-            <table className="w-full text-center">
+      {investmentData && investmentData.length > 0 ? (
+        <div className="flex flex-col justify-between md:flex-row md:w-3/4 mx-auto">
+          <div className="w-1/2 md:w-1/3 mx-auto">
+            <Doughnut data={ChartData} id="chart" />
+          </div>
+          <div className="md:w-1/2 my-auto md:pl-4 text-gray-600">
+            <table className="w-full text-center table-auto">
               <thead>
                 <tr>
-                  <th className="text-black text-md">Sub Category</th>
-                  <th className="text-black text-md">Amount</th>
-                  <th className="text-black text-md">Return</th>
+                  <th className="text-black text-md font-semibold p-2">Sub Category</th>
+                  <th className="text-black text-md font-semibold p-2">Amount</th>
+                  <th className="text-black text-md font-semibold p-2">Return</th>
+                  <th className="text-black text-md font-semibold p-2">Profit/Loss (%)</th>
                 </tr>
               </thead>
               <tbody>
-                {Object.keys(subCategoryTotal).map((subCategoryName, index) => (
-                  <tr key={index}>
-                    <td>{subCategoryName}</td>
-                    <td>${subCategoryTotal[subCategoryName].amount}</td>
-                    <td>${subCategoryTotal[subCategoryName].returnAmount}</td>
-                  </tr>
-                ))}
+                {Object.keys(subCategoryTotal).map((subCategoryName, index) => {
+                  const amount = subCategoryTotal[subCategoryName].amount;
+                  const returnAmount = subCategoryTotal[subCategoryName].returnAmount;
+                  const profitLossPercentage = ((returnAmount - amount) / amount) * 100;
+
+                  const profitLossClass = profitLossPercentage >= 0 ? "text-green-500" : "text-red-500";
+
+                  return (
+                    <tr key={index}>
+                      <td className="p-2">{subCategoryName}</td>
+                      <td className="p-2">${amount}</td>
+                      <td className="p-2">${returnAmount}</td>
+                      <td className={`p-2 ${profitLossClass}`}>
+                        {profitLossPercentage.toFixed(2)}%
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
-            </div>
-      </div>
-          ) : (
-            <p>No investment data available.</p>
-          )}
-        
+          </div>
+        </div>
+      ) : (
+        <p>No investment data available.</p>
+      )}
     </div>
   );
 }
+
 
 export default TabsComponent;

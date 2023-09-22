@@ -33,7 +33,7 @@ const Hero = () => {
         <img
           src={finance}
           alt="Hero Image"
-          className=" h-[90vh] w-full object-cover"
+          className=" h-[90vh] w-full object-cover "
           style={{ margin: 0, padding: 0 }}
         />
       </div>

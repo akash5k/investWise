@@ -38,7 +38,7 @@ const About = () => {
       <div className="flex items-center justify-center flex-wrap gap-8 p-4">
         <div className="card bg-white p-4 rounded-xl shadow-2xl w-[250px] text-center">
           <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
             alt="Contributor 1"
             className="w-24 h-24 rounded-full object-cover transition duration-200 hover:scale-110 mx-auto"
           />
@@ -54,7 +54,7 @@ const About = () => {
 
         <div className="card bg-white p-4 rounded-xl shadow-2xl w-[250px] text-center">
           <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"
+            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
             alt="Contributor 2"
             className="w-24 h-24 rounded-full object-cover transition duration-200 hover:scale-110 mx-auto"
           />

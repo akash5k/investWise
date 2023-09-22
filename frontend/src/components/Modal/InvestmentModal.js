@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 
+import { motion, AnimatePresence } from "framer-motion";
 import InvestmentContext from "../../context/investment/investmentContext"
 
 const InvestmentModal = ({ isOpen, onClose }) => {
@@ -37,9 +38,14 @@ const InvestmentModal = ({ isOpen, onClose }) => {
   }
 
   return (
+    <AnimatePresence>
     <>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md">
+        <motion.div 
+        className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-md"
+        initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}>
           <div className="relative w-screen max-w-3xl p-6 bg-white rounded-lg shadow-lg">
             <div className="border-0 flex flex-col w-full outline-none focus:outline-none">
               <div className="flex items-start justify-between mb-2">
@@ -153,9 +159,10 @@ const InvestmentModal = ({ isOpen, onClose }) => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </>
+    </AnimatePresence>
   )
 }
 
