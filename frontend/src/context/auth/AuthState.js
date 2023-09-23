@@ -18,6 +18,10 @@ const AuthState = ({ children }) => {
     // username email and password
 
     const data = await fetcher("/users/register", "POST", {}, formData)
+    if (data.error) {
+      setAuth({ ...auth, error: data.error })
+      return
+    }
 
     localStorage.setItem("userInfo", JSON.stringify(data.data))
     setAuth({

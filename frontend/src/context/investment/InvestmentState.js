@@ -225,7 +225,21 @@ const InvestmentState = ({ children }) => {
       setInvestState({ ...investState, error: data.error, loading: false })
       return
     }
-    getAllInvestments()
+    await getAllInvestments()
+  }
+
+  // delete an investment
+  const deleteInvestment = async (id) => {
+    setInvestState({ ...investState, loading: true })
+    const data = await fetcher(`/invest/deleteinvestment/${id}`, "DELETE", {
+      Authorization: `Bearer ${user?.token || ""}`,
+    })
+
+    if (data.error) {
+      setInvestState({ ...investState, error: data.error, loading: false })
+      return
+    }
+    await getAllInvestments()
   }
 
   return (
@@ -237,6 +251,7 @@ const InvestmentState = ({ children }) => {
         loading: investState.loading,
         error: investState.errors,
         addInvestment,
+        deleteInvestment,
         LABELSDATA,
       }}
     >

@@ -35,7 +35,7 @@ const SignIn = () => {
   const onSubmit = (e) => {
     e.preventDefault()
     if (email === "" || password === "") {
-      alert("Please fill in all fields", "danger")
+      toast.error("Please fill in all the details")
     } else {
       login({
         email,
@@ -43,7 +43,7 @@ const SignIn = () => {
       })
     }
   }
-  
+
   return (
     <div className="flex h-[90vh] ">
       {/* Left side with the image */}
@@ -55,10 +55,10 @@ const SignIn = () => {
         <h1 className="text-5xl font-bold uppercase tracking-[0.4rem]">
           Investwise
         </h1>
-        <div className="flex items-center justify-center space-x-4 mt-4 gap-4">        
+        <div className="flex items-center justify-center space-x-4 mt-4 gap-4">
           <FaFacebook className="text-3xl" />
           <FaInstagram className="text-3xl" />
-          <FaTwitter className="text-3xl" />        
+          <FaTwitter className="text-3xl" />
         </div>
       </div>
       {/* Right side with the login form */}
@@ -80,7 +80,6 @@ const SignIn = () => {
                   value={email}
                   onChange={onChange}
                   placeholder="Email"
-                  required
                 />
               </div>
               <div className="mt-4">
@@ -91,7 +90,6 @@ const SignIn = () => {
                   name="password"
                   value={password}
                   onChange={onChange}
-                  required
                 />
               </div>
               <button

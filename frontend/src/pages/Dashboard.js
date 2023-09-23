@@ -1,81 +1,86 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import AuthContext from "../context/auth/authContext";
+import React, { useEffect, useState, useContext, useRef } from "react"
+import AuthContext from "../context/auth/authContext"
 
-import {AiFillDelete} from "react-icons/ai"
-import {BsGraphUpArrow,BsGraphDownArrow} from "react-icons/bs"
-import "chart.js/auto";
-import Tabs from "../components/Tabs/Tabs";
-import InvestmentModal from "../components/Modal/InvestmentModal";
-import InvestmentContext from "../context/investment/investmentContext";
-import InvestmentReturnChart from "../components/Charts/InvestmentReturnChart";
-import Loader from "../components/loader";
+import { AiFillDelete } from "react-icons/ai"
+import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs"
+import "chart.js/auto"
+import Tabs from "../components/Tabs/Tabs"
+import InvestmentModal from "../components/Modal/InvestmentModal"
+import InvestmentContext from "../context/investment/investmentContext"
+import InvestmentReturnChart from "../components/Charts/InvestmentReturnChart"
+import Loader from "../components/loader"
 
-
-import $ from "jquery";
-import "datatables.net-responsive-dt"; 
-import "datatables.net-dt/css/jquery.dataTables.min.css"; 
+import $ from "jquery"
+import "datatables.net-responsive-dt"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+import { toast } from "react-toastify"
 
 const Dashboard = () => {
-  const authContext = useContext(AuthContext);
-  const investmentContext = useContext(InvestmentContext);
-  const { user } = authContext;
-  const { parentLabels, getAllInvestments, investments, loading } =
-    investmentContext;
+  const authContext = useContext(AuthContext)
+  const investmentContext = useContext(InvestmentContext)
+  const { user } = authContext
+  const { deleteInvestment, getAllInvestments, investments, loading } =
+    investmentContext
 
-  const tableRef = useRef(null);
+  const tableRef = useRef(null)
 
   useEffect(() => {
-    getAllInvestments();
-    let dataTable;
+    getAllInvestments()
+    let dataTable
 
     if (tableRef.current) {
       dataTable = $(tableRef.current).DataTable({
         responsive: true,
-      });
+      })
     }
 
     return () => {
       // Destroy the DataTable instance to prevent memory leaks
       if (dataTable) {
-        dataTable.destroy();
+        dataTable.destroy()
       }
-    };
-  }, [loading]);
+    }
+  }, [loading])
 
   const calculateTotalProfit = (investments) => {
-    let returns = 0;
+    let returns = 0
     investments.forEach((i) => {
-      returns += i.returnAmount - i.amount;
-    });
-    return returns;
-  };
+      returns += i.returnAmount - i.amount
+    })
+    return returns
+  }
 
   const calculateTotalReturnPercentage = (investments) => {
-    let totalReturnAmount = 0;
-    let totalInvestedAmount = 0;
+    let totalReturnAmount = 0
+    let totalInvestedAmount = 0
 
     for (const investment of investments) {
-      const { amount, returnAmount } = investment;
-      totalReturnAmount += returnAmount;
-      totalInvestedAmount += amount;
+      const { amount, returnAmount } = investment
+      totalReturnAmount += returnAmount
+      totalInvestedAmount += amount
     }
 
     const totalPercentage =
-      ((totalReturnAmount - totalInvestedAmount) / totalInvestedAmount) * 100;
+      ((totalReturnAmount - totalInvestedAmount) / totalInvestedAmount) * 100
 
-    return totalPercentage.toFixed(2);
-  };
+    return totalPercentage.toFixed(2)
+  }
 
-  const net = calculateTotalProfit(investments);
-  const totalGrowthPercentage = calculateTotalReturnPercentage(investments);
+  const net = calculateTotalProfit(investments)
+  const totalGrowthPercentage = calculateTotalReturnPercentage(investments)
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => {
-    setIsModalOpen(true);
-  };
+    setIsModalOpen(true)
+  }
   const closeModal = () => {
-    setIsModalOpen(false);
-  };
+    setIsModalOpen(false)
+  }
+
+  const onDelete = (id) => {
+    deleteInvestment(id)
+    toast.success("Deleted Successfully!")
+  }
 
   return (
     <>
@@ -98,11 +103,11 @@ const Dashboard = () => {
                     <span className="text-2xl font-bold">${net}</span>
                     {net > 0 ? (
                       <span className="flex flex-row  gap-2 text-xs font-bold text-green-600">
-                        Total Profit <BsGraphUpArrow/>
+                        Total Profit <BsGraphUpArrow />
                       </span>
                     ) : (
                       <span className="flex flex-row  gap-2 text-xs font-bold text-red-600">
-                        Total Loss <BsGraphDownArrow/>
+                        Total Loss <BsGraphDownArrow />
                       </span>
                     )}
                   </div>
@@ -172,7 +177,11 @@ const Dashboard = () => {
                                   {i.parameter.name}
                                 </td>
                                 <td className="py-2 px-3 border border-gray-300 flex flex-row justify-between">
-                                  {i.childParameter.name} <AiFillDelete className="text-gray-400 hover:text-gray-700 transition-all"/>
+                                  {i.childParameter.name}{" "}
+                                  <AiFillDelete
+                                    onClick={() => onDelete(i.id)}
+                                    className="text-gray-400 hover:text-gray-700 transition-all"
+                                  />
                                 </td>
                               </tr>
                             ))}
@@ -197,7 +206,7 @@ const Dashboard = () => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

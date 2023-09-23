@@ -1,52 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { authbanner } from "../../assets";
-import { useContext } from "react";
-import AuthContext from "../../context/auth/authContext";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { FcGoogle } from "react-icons/fc"
+import { authbanner } from "../../assets"
+import { useContext } from "react"
+import AuthContext from "../../context/auth/authContext"
+import { useNavigate } from "react-router-dom"
 
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa"
+import { toast } from "react-toastify"
 
 const SignUp = () => {
-  const authContext = useContext(AuthContext);
-  const { register, error, isAuthenticated } = authContext;
+  const authContext = useContext(AuthContext)
+  const { register, error, isAuthenticated } = authContext
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-  });
-  const navigate = useNavigate();
+  })
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard");
+      navigate("/dashboard")
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated])
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-  const { name, email, password, confirmPassword } = user;
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
+  const { name, email, password, confirmPassword } = user
 
   const onSubmit = (e) => {
-    e.preventDefault();
-    if (name === "" || email === "" || password === "" || confirmPassword === "") {
-      alert("Please fill in all fields", "danger");
+    e.preventDefault()
+    if (
+      name === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      toast.warn("Please fill in all the details")
     } else if (password !== confirmPassword) {
-      alert("Passwords do not match", "danger");
+      toast.error("Passwords do not match")
     } else {
       register({
         name,
         email,
         password,
-      });
+      })
     }
-  };
+  }
 
   return (
-    <div className="flex h-[90vh] ">      
+    <div className="flex h-[90vh] ">
       {/* Right side with the sign-up form */}
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-md px-8 py-6 ">
@@ -60,8 +66,7 @@ const SignUp = () => {
                   name="name"
                   value={name}
                   onChange={onChange}
-                  placeholder="Full Name"
-                  required
+                  placeholder="Username"
                 />
               </div>
               <div className="mt-4">
@@ -105,7 +110,9 @@ const SignUp = () => {
               </button>
               <span className="flex items-center justify-center space-x-2 pt-2">
                 <span className="h-px bg-gray-400 w-14"></span>
-                <span className="font-normal text-gray-400">or sign up with</span>
+                <span className="font-normal text-gray-400">
+                  or sign up with
+                </span>
                 <span className="h-px bg-gray-400 w-14"></span>
               </span>
               <button className="flex items-center justify-center px-6 py-2 w-full mt-4 bg-gray-200 rounded-lg hover:bg-gray-700 hover:text-white">
@@ -143,7 +150,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
