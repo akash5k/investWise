@@ -59,3 +59,20 @@ export const getAllInvestments = async (req, res, next) => {
     next(new Error("Some Error Occured"))
   }
 }
+
+// delete an investment
+export const deleteInvestment = async (req, res, next) => {
+  const { id } = req.params
+  try {
+    await prisma.investment.delete({
+      where: {
+        id,
+      },
+    })
+    res.status(200).json({ msg: "success" })
+  } catch (err) {
+    console.log(err)
+    res.status(400)
+    next(new Error("Some Error Occured"))
+  }
+}

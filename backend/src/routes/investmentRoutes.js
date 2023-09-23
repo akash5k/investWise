@@ -1,6 +1,7 @@
 import express from "express"
 import {
   addInvestment,
+  deleteInvestment,
   getAllInvestments,
   getAllParameters,
 } from "../controllers/investmentController.js"
@@ -13,5 +14,7 @@ router.get("/getallparams", getAllParameters)
 router.get("/getallinvestments", protect, getAllInvestments)
 
 router.post("/addinvestment", protect, addInvestment)
+
+router.delete("/deleteinvestment/:id", deleteInvestment)
 
 export default router
